@@ -277,15 +277,17 @@ Tokens live in the file at `tailwindCssFile` (usually `app/globals.css`). **Neve
 
 ### Add a custom token
 
+Use the kit's sRGB hex format (not OKLCH) so new tokens match the existing convention, and add the matching variable to the Figma `shadcn/ui` collection (both modes) in the same change.
+
 ```css
 /* 1. Define */
 :root {
-  --warning: oklch(0.84 0.16 84);
-  --warning-foreground: oklch(0.28 0.07 46);
+  --warning: #f59e0b;
+  --warning-foreground: #451a03;
 }
 .dark {
-  --warning: oklch(0.41 0.11 46);
-  --warning-foreground: oklch(0.99 0.02 95);
+  --warning: #b45309;
+  --warning-foreground: #fffbeb;
 }
 
 /* 2a. Tailwind v4 */
@@ -295,19 +297,24 @@ Tokens live in the file at `tailwindCssFile` (usually `app/globals.css`). **Neve
 }
 ```
 
-For Tailwind v3, register in `tailwind.config.js` with `oklch(var(--warning) / <alpha-value>)`.
+For Tailwind v3, register in `tailwind.config.js` with `var(--warning)`.
 
-### Apply or switch a theme
+### Re-theme (do NOT preset-swap)
 
-```bash
-npx shadcn@latest apply --preset <code>
-npx shadcn@latest apply <code> --only theme,font
-npx shadcn@latest preset decode <code>
-```
+Token values are synced **1:1 from the Figma kit** (exact sRGB). **Never run
+`npx shadcn@latest apply --preset`** — it overwrites the kit-synced values and
+makes generated code drift from Figma. To re-theme: re-export the Figma
+`shadcn/ui` collection and regenerate `globals.css`. See `DESIGN.md` §2.5.
 
 ### Radius
 
-`--radius` (default `0.625rem`) drives the whole scale. `rounded-md` = `calc(var(--radius) - 2px)`, `rounded-lg` = `var(--radius)`.
+The kit uses the **Tailwind v4 static radius scale** — *not* shadcn's
+`calc(var(--radius) * n)`. `rounded-sm` = 4px, `rounded-md` = 6px
+(`--radius-md`), `rounded-lg` = 8px (`--radius-lg`), `rounded-xl` = 12px,
+`rounded-2xl` = 16px, `rounded-3xl` = 24px, `rounded-4xl` = 32px. `--radius`
+is `0.5rem` (8px = `rounded-lg`, the kit default). When `get_variable_defs`
+reports a radius, map it to the exact step above — don't recompute. See
+`DESIGN.md` §3.
 
 ---
 
@@ -321,11 +328,11 @@ The names in Figma Variables must match the CSS variable names in `globals.css`:
 | `primary` | `--primary` |
 | `primary-foreground` | `--primary-foreground` |
 | `muted-foreground` | `--muted-foreground` |
-| `radius/lg` | `--radius` |
+| `rounded-lg` | `--radius-lg` (8px, static scale) |
 
-When `get_variable_defs` returns `primary`, you write `bg-primary` — no translation, no guesswork.
+When `get_variable_defs` returns `primary`, you write `bg-primary` — no translation, no guesswork. The token's **value** is whatever `globals.css` holds (kit-synced sRGB); never substitute a different color, lighten/darken, or "improve" it — that is drift.
 
-Use Figma **modes** (`Light` / `Dark`) on the semantic collection so each variable has both values, matching `:root` and `.dark`.
+Use the kit's semantic collection modes (`light mode` / `dark mode`) so each variable has both values, matching `:root` and `.dark` in `globals.css`. Values are exact kit sRGB — never hand-edit; re-export from Figma. Kit-specific tokens (`background-color`, `semantic-background/-foreground/-border`) exist too — use them as-is, don't drop or invent.
 
 ---
 
