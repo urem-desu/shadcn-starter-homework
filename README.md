@@ -33,9 +33,9 @@ This starter is intentionally **empty of components**. shadcn/ui's philosophy is
 | ------------ | --------------------------------------------- |
 | Framework    | Next.js 15 (App Router) · React 19            |
 | Language     | TypeScript                                    |
-| Styling      | Tailwind CSS v4 — OKLCH tokens, `@theme inline` |
+| Styling      | Tailwind CSS v4 — Figma-kit-synced tokens, `@theme inline` |
 | Components   | shadcn/ui (CLI-driven)                         |
-| Theme        | Default · Neutral                             |
+| Theme        | Synced 1:1 from Figma kit `design-lazyyy-figma-uikit-pro` |
 | Icons        | lucide                                        |
 
 ## Quick start
@@ -72,7 +72,7 @@ The workflow is enforced by the skill at `.claude/skills/shadcn-ui-tailwind-figm
 .
 ├── .claude/skills/shadcn-ui-tailwind-figma/SKILL.md   # Strict Figma fidelity workflow
 ├── app/
-│   ├── globals.css     # Tokens (Default Neutral theme, light + dark)
+│   ├── globals.css     # Tokens (Figma-kit-synced, light + dark)
 │   ├── layout.tsx
 │   └── page.tsx        # Replace this with your first screen
 ├── lib/utils.ts        # cn() helper
@@ -89,13 +89,13 @@ The workflow is enforced by the skill at `.claude/skills/shadcn-ui-tailwind-figm
 
 ## Theming
 
-Tokens live in `app/globals.css` — both light (`:root`) and dark (`.dark`) variants.
+Tokens live in `app/globals.css` — both light (`:root`) and dark (`.dark`) variants — synced **1:1 from the Figma kit** (exact sRGB values).
 
 To change the look:
 
-- **Whole theme swap** — `npx shadcn@latest apply --preset <code>` (preset codes from <https://ui.shadcn.com/create>)
-- **Just one token** — edit `app/globals.css` directly
-- **New custom token** — add to `:root` + `.dark`, then register in `@theme inline` (see `DESIGN.md` §7)
+- **Re-theme** — re-export the Figma `shadcn/ui` collection and regenerate `globals.css`. **Don't** run `apply --preset`; it overwrites the kit-synced values (see `DESIGN.md` §2.5)
+- **Just one token** — edit `app/globals.css` directly, then update the matching Figma variable
+- **New custom token** — add to `:root` + `.dark`, then register in `@theme inline` (see `DESIGN.md` §9)
 
 > Don't create a new CSS file — always edit `globals.css`.
 
@@ -119,7 +119,7 @@ _(Not pre-installed — add only if you need it.)_
 
 ## Figma kits
 
-If you need a Figma kit aligned with this codebase, see `DESIGN.md` §9.4 for the official list. Match the variable names to the names in `globals.css` for clean MCP token resolution.
+This codebase is synced from `design-lazyyy-figma-uikit-pro` (`shadcn/ui` collection). For other shadcn-aligned kits, see `DESIGN.md` §11.4. Match the variable names to the names in `globals.css` for clean MCP token resolution.
 
 ## What this starter does NOT include
 
