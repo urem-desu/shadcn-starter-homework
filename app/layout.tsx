@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "shadcn/ui + Figma starter",
-  description: "Design system starter — shadcn/ui + Tailwind v4 + Figma MCP",
+  title: "Acme Inc — Turn Traffic Into Decisions",
+  description: "Track visitor behavior, monitor performance, and uncover growth opportunities with real-time website analytics.",
 }
 
 export default function RootLayout({
