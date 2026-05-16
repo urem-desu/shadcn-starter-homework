@@ -1,16 +1,42 @@
+<div align="center">
+
 # shadcn/ui + Figma Starter
 
-A minimal starter for building UIs with **shadcn/ui + Tailwind CSS v4**, with strict 1:1 Figma fidelity enforced by an AI agent skill.
+**A minimal Next.js starter for building UIs with shadcn/ui + Tailwind CSS v4 — with strict 1:1 Figma fidelity enforced by an AI agent skill.**
 
-This starter is intentionally **empty of components**. shadcn/ui's philosophy is that components live in your repo as source — install them via the CLI as you need them, not ahead of time.
+[![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-CLI--driven-000000)](https://ui.shadcn.com/)
+
+</div>
+
+---
+
+This starter is intentionally **empty of components**. shadcn/ui's philosophy is that components live in your repo as source — install them via the CLI when you need them, not ahead of time.
+
+## Table of contents
+
+- [Stack](#stack)
+- [Quick start](#quick-start)
+- [Adding components from Figma](#adding-components-from-figma)
+- [Folder layout](#folder-layout)
+- [Theming](#theming)
+- [Dark mode](#dark-mode)
+- [Figma kits](#figma-kits)
+- [What this starter does NOT include](#what-this-starter-does-not-include)
 
 ## Stack
 
-- Next.js 15 (App Router) · TypeScript · React 19
-- Tailwind CSS v4 (OKLCH tokens, `@theme inline`)
-- shadcn/ui (CLI-driven)
-- Default theme: Neutral
-- Icon library: lucide
+| Layer        | Choice                                        |
+| ------------ | --------------------------------------------- |
+| Framework    | Next.js 15 (App Router) · React 19            |
+| Language     | TypeScript                                    |
+| Styling      | Tailwind CSS v4 — OKLCH tokens, `@theme inline` |
+| Components   | shadcn/ui (CLI-driven)                         |
+| Theme        | Default · Neutral                             |
+| Icons        | lucide                                        |
 
 ## Quick start
 
@@ -22,23 +48,23 @@ npm install
 # 2. Verify shadcn project context
 npx shadcn@latest info
 
-# 3. Dev server
+# 3. Start the dev server
 npm run dev
 ```
 
+Then open [http://localhost:3000](http://localhost:3000) and replace `app/page.tsx` with your first screen.
+
 ## Adding components from Figma
 
-The workflow is enforced by the skill at `.claude/skills/shadcn-ui-tailwind-figma/SKILL.md` (auto-loaded by Claude Code, Cursor, Copilot, and other Agent Skill–compatible tools).
-
-Summary:
+The workflow is enforced by the skill at `.claude/skills/shadcn-ui-tailwind-figma/SKILL.md` — auto-loaded by Claude Code, Cursor, Copilot, and other Agent Skill–compatible tools.
 
 1. Run `get_design_context`, `get_screenshot`, and `get_variable_defs` on the Figma node.
-2. Write an inventory of what's in the node (containers, layers, text, sizes, tokens, variants).
+2. Write an inventory of what's in the node — containers, layers, text, sizes, tokens, variants.
 3. Install any missing components: `npx shadcn@latest add <name>`.
-4. Build the JSX from the inventory — nothing added, nothing dropped.
+4. Build the JSX from the inventory — **nothing added, nothing dropped**.
 5. Validate against the Figma screenshot.
 
-Full rules and "when to stop and ask" list: see the skill file.
+> Full rules and the "when to stop and ask" list live in the skill file.
 
 ## Folder layout
 
@@ -67,11 +93,11 @@ Tokens live in `app/globals.css` — both light (`:root`) and dark (`.dark`) var
 
 To change the look:
 
-- **Whole theme swap:** `npx shadcn@latest apply --preset <code>` (preset codes from <https://ui.shadcn.com/create>)
-- **Just one token:** edit `app/globals.css` directly
-- **New custom token:** add to `:root` + `.dark`, then register in `@theme inline` (see `DESIGN.md` §7)
+- **Whole theme swap** — `npx shadcn@latest apply --preset <code>` (preset codes from <https://ui.shadcn.com/create>)
+- **Just one token** — edit `app/globals.css` directly
+- **New custom token** — add to `:root` + `.dark`, then register in `@theme inline` (see `DESIGN.md` §7)
 
-Don't create a new CSS file — always edit `globals.css`.
+> Don't create a new CSS file — always edit `globals.css`.
 
 ## Dark mode
 
@@ -89,7 +115,7 @@ Then wrap `app/layout.tsx`:
 </ThemeProvider>
 ```
 
-(Not pre-installed — add only if you need it.)
+_(Not pre-installed — add only if you need it.)_
 
 ## Figma kits
 
@@ -106,5 +132,4 @@ By design, to keep things minimal:
 - No custom fonts (add to `globals.css` when your Figma specifies one)
 - No `tailwind.config.ts` (Tailwind v4 uses `@theme inline` in `globals.css` only)
 
-Add things when the design calls for them, not before.
-# shadcn-figma-starter-batch2
+> Add things when the design calls for them, not before.
