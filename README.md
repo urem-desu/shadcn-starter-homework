@@ -331,3 +331,4 @@ By design, to stay minimal — add when the design calls for it, not before:
 - shadcn/ui — [Theming](https://ui.shadcn.com/docs/theming) · [Tailwind v4](https://ui.shadcn.com/docs/tailwind-v4) · [Figma](https://ui.shadcn.com/docs/figma)
 - [Tailwind CSS v4 — Theme](https://tailwindcss.com/docs/theme)
 - [Figma Dev Mode MCP server](https://www.figma.com/blog/introducing-figmas-dev-mode-mcp-server/)
+# shadcn-starter-homework
